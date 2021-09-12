@@ -39,7 +39,7 @@ class Block
             if (line.Length != 0 && ret != null)
             {
                 //Console.WriteLine(line);
-                yield return ret;
+                //yield return ret;
                 ret = null;
                 //continue;
             }
@@ -60,7 +60,8 @@ class Block
 
             if (ret != null)
                 ret.Body.Add(line);
-        }
+                yield return ret;
+            }
     }
   }
 }
