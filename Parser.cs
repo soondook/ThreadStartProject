@@ -36,12 +36,12 @@ class Block
         foreach (var line in File.ReadLines(path).Select(l => l.Trim()))
         {
             //Console.WriteLine(line);
-            if (line.Length != 0 && ret != null)
+            if (line.Length == 0 && ret != null)
             {
                 //Console.WriteLine(line);
                 //yield return ret;
                 ret = null;
-                //continue;
+                continue;
             }
 
                 if (line.EndsWith(":"))
