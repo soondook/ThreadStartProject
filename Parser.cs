@@ -39,7 +39,7 @@ class Block
             if (line.Length == 0 && ret != null)
             {
                 //Console.WriteLine(line);
-                //yield return ret;
+                yield return ret;
                 ret = null;
                 continue;
             }
@@ -49,7 +49,7 @@ class Block
 
                     ret = new Block { Title = line.TrimEnd(':'), Body = new List<string>() };
                     //Console.WriteLine(ret.Body);
-                    //continue;
+                    continue;
                 }
                 else
                 {
