@@ -33,7 +33,7 @@ namespace ThreadStartProject
             //myThread1.Start(counter); // запускаем поток
             string connection_result="";
             List<SFTPData> sFTPDatas = new List<SFTPData>() { };
-            string host = "ACER-Aspire";
+            string host = "";
             DBSQLServerUtils.ValidateDefaultInstancePostgreSqlServer(connection_result);
             string chk_res = DBSQLServerUtils.Connection2(host);
             Console.WriteLine(chk_res);
@@ -67,7 +67,8 @@ namespace ThreadStartProject
 
                 {
                     IP = sFTPDatas[i].Ip,
-                    CompassName = sFTPDatas[i].CompassName
+                    CompassName = sFTPDatas[i].CompassName,
+                    c = i
 
                 };
 
@@ -78,7 +79,7 @@ namespace ThreadStartProject
                 };*/
                 myThread1.Start(merch);
                 //myThread1.Start(counter);
-                Thread.Sleep(600);
+                //Thread.Sleep(60);
             }
             
             /*
@@ -111,25 +112,20 @@ namespace ThreadStartProject
         public static void Count2(object obj)
         {
             Merchant m = (Merchant)obj;
-            //Counter c = (Counter)obj;
-            //int n = (int)x;
-            //for (int i = 1; i < 9; i++)
-            // {
-            //var j = c.x;
-            //var k = c.y;
-            //var n = c.t;
-            SSH_Command.Connection(m.IP, 22, m.CompassName);
-            //Console.WriteLine("x_: {0} y_: {1} t_: {2} ", j, k, n);
-            //Console.WriteLine("поток:{0} Значение: {1} itteration {2} ", c.t, ( c.x * c.y * i),  i);
-            //Console.WriteLine("поток:{0} Значение: {1} ", c.t, (c.x + c.y) * c.t);
-            Thread.Sleep(400);
-            // }
+            bool j = SSH_Command.CheckFileLocked();
+            Console.WriteLine(j);
+            if (!j)
+            {
+                SSH_Command comm = new SSH_Command(); //(SSH_Command)SSH_Command.Connection(m.IP, 22, compassname: m.CompassName);
+                comm.Connection(m.IP, 22, m.CompassName);
+            }
+            
         }
         public class Counter
         {
             public int x = 4;
             public int y = 5;
-            public int t;
+            public int t = 0;
         }
 
 
@@ -137,6 +133,7 @@ namespace ThreadStartProject
         {
             public string IP;
             public string CompassName;
+            public int c;
             
         }
 

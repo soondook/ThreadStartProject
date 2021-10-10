@@ -20,11 +20,24 @@ namespace ThreadStartProject
         public int ErrorCode { get; set; }
     }
 
-    class SSH_Command
+     class SSH_Command
     {
-
+        public static object lockObj = new Object();
         //public static string Connection(string host, int port, string pass)
-        public static object Connection(string host, int port, string compassname)
+        public static bool CheckFileLocked()
+        {
+            string filePath = "C:\\inetpub\\GoogleAuth\\wwwroot\\scripts\\fsum.exe";
+            //using var fileStream = new FileStream(filePath, FileMode.Open);
+            int secondsToWait = 1;
+            if (!Filestreamlock.IsFileLocked(filePath, secondsToWait))
+            {
+                return false;
+            }
+            
+            return true;
+        }
+
+        public void Connection(string host, int port, string compassname)
         {
             string localPath;
             string localPath1 = "C:\\inetpub\\GoogleAuth\\wwwroot\\scripts\\";
@@ -105,23 +118,29 @@ namespace ThreadStartProject
                 List<Action2> ActionData = new List<Action2> { new Action2() { IsConnect = IsConnect, Status = IsConnection, ErrorCode = ResultWorker } };
                 //object newJsons2 = JsonConvert.SerializeObject(ActionData);
                 object newAction = JsonConvert.SerializeObject(ActionData);
-                return (newAction);
+                //return (newAction);
 
             }
         }
         public static async Task<string> SftpConnectionAsync(string root_destination, string localPath, string compassname, ConnectionInfo con, string source)
         {
+           
             using (SftpClient client = new SftpClient(con))
             {
                 client.Connect();
                 List<Task> tasks = new List<Task>();
-                var fileStream = new FileStream(localPath + source, FileMode.Open);
-                string destination = root_destination + source;
-                tasks.Add(UploadFileAsync(fileStream, destination, client, compassname, source));
-                await Task.WhenAll(tasks).ConfigureAwait(true);
-                client.Dispose();
-                fileStream.Close();
-                fileStream.Dispose();
+                try
+                {
+                    using (var fileStream = new FileStream(localPath + source, FileMode.Open))
+                    {
+                        string destination = root_destination + source;
+                        tasks.Add(UploadFileAsync(fileStream, destination, client, compassname, source));
+                        await Task.WhenAll(tasks).ConfigureAwait(true);
+                        fileStream.Close();
+                        fileStream.Dispose();
+                    }
+                }
+                catch (IOException e) { }
                 client.Dispose();
                 return Task.CompletedTask.Status.ToString();
             }
