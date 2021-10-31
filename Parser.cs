@@ -39,10 +39,10 @@ class Block
             if (line.Length == 0 && ret != null)
             {
                 //Console.WriteLine(line);
-                yield return ret;
+                //yield return ret; --Раскомментировать для вывода заголовков!  
                 ret = null;
-                continue;
-            }
+                //continue; --Раскомментировать для вывода пробелов между блоками!
+                }
 
                 if (line.EndsWith(":"))
                 {
