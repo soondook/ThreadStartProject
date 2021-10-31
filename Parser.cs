@@ -49,7 +49,7 @@ class Block
 
                     ret = new Block { Title = line.TrimEnd(':'), Body = new List<string>() };
                     //Console.WriteLine(ret.Body);
-                    //continue;
+                    continue;
                 }
                 else
                 {
