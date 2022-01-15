@@ -39,9 +39,9 @@ class Block
             if (line.Length == 0 && ret != null)
             {
                 //Console.WriteLine(line);
-                //yield return ret; --Раскомментировать для вывода заголовков!  
+                //yield return ret; //-- если ракоментить, то будет выводить только последнюю строку в файле с пустыми разделителями!  
                 ret = null;
-                //continue; --Раскомментировать для вывода пробелов между блоками!
+                continue; //--Раскомментировать скрытия пробелов между блоками в файле с пустыми разделителями!
                 }
 
                 if (line.EndsWith(":"))
@@ -49,7 +49,7 @@ class Block
 
                     ret = new Block { Title = line.TrimEnd(':'), Body = new List<string>() };
                     //Console.WriteLine(ret.Body);
-                    continue;
+                    continue; //---Закоментить для вывода заголовков с (:)
                 }
                 else
                 {

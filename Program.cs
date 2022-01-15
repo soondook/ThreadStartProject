@@ -12,6 +12,7 @@ namespace ThreadStartProject
             //Thread myThread = new Thread(Count);
             //myThread.Start(); // запускаем поток
             //myThread1.Start(counter); // запускаем поток
+            string results = OTP.GenarateTOTP();
 
 
             for (int i = 0; i < 500; i++)
@@ -57,6 +58,9 @@ namespace ThreadStartProject
                  Thread.Sleep(400);
            // }
         }
+
+
+
         /*
         public static void Count()
         {
