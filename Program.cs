@@ -18,7 +18,7 @@ namespace ThreadStartProject
             {
                 int f = i;
                 int j = i;
-
+                
                 Counter counter = new Counter
                 {
                     x = f,
@@ -26,12 +26,16 @@ namespace ThreadStartProject
                     t = i
                 };
 
-                Thread myThread1 = new Thread(new ParameterizedThreadStart(Count1));
-                myThread1.Name = "Поток " + i.ToString();
+                Thread myThread1 = new Thread(new ParameterizedThreadStart(Count1))
+                {
+                    Name = "Поток " + i.ToString()
+                };
                 //myThread1.Start(counter);
             }
             string args1 = "new";
-            Parser.RunParser(args1);
+            //Parser.RunParser(args1);
+            Parsers.RunParser(args1);
+            //CallDelegate.Method();
             /*
             for (int i = 1; i < 9; i++)
             {

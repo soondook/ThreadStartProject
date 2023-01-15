@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ThreadStartProject": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
