@@ -12,6 +12,7 @@ namespace ThreadStartProject
             //Thread myThread = new Thread(Count);
             //myThread.Start(); // запускаем поток
             //myThread1.Start(counter); // запускаем поток
+            string s = "Україна,область Дніпропетровська,місто Дніпро,вулиця Набережна Перемоги,будинок 32 в 0 м від Вас";
 
 
             for (int i = 0; i < 500; i++)
@@ -32,10 +33,12 @@ namespace ThreadStartProject
                 };
                 //myThread1.Start(counter);
             }
-            string args1 = "new";
-            //Parser.RunParser(args1);
-            Parsers.RunParser(args1);
-            //CallDelegate.Method();
+            //string args1 = "new";
+            //Parsers.RunParser(args1);
+            //CallDelegate.MethodOTP();
+            CallDelegate.Method7();
+            SplitClass.SSplit(s);
+            YieldClass2.ResultElder();
             /*
             for (int i = 1; i < 9; i++)
             {

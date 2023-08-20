@@ -14,15 +14,9 @@ namespace ThreadStartProject
 
     public class CallDelegate
     {
-        //public event MyDelegate Event;
-        //public event Action EventAction;
-
         public static string[] vs = null;
         public static void Method()
         {
-            string inputs = "JBSWY3DPEHPK3PXV";
-            string v = "MethodV";
-
             Person person = new Person
             {
                 Name = "Bob"
@@ -35,59 +29,73 @@ namespace ThreadStartProject
             person.TakeTime(DateTime.Parse("08.01.2023 10:30:41"));
             //Console.WriteLine(DateTime.Now);
 
+        }
 
-            //Message valueDelegate = DelegateClass.GenarateTOTP;
-            //valueDelegate(inputs);
-            
+        public static void MethodOTP()
+        {
+            string inputs = "JBSWY3DPEHPK3PXV";
+           
             Action action2 = DelegateClass.GenarateTOTP;
             action2(inputs);
-            
-            Message message1 = DelegateClass.GenarateTOTP;
+
+            Message message1 = DelegateClass.VerifyTOTP;
             var mess = message1.Invoke(inputs);
+            Console.WriteLine("mess: "+ mess);
 
-            //List<MyClass> Method5(string arg1, string arg2);
-            //var td1 = new TestDelegate<MyClass1>(Method5);
+        }
 
-            TestDelegate test = Method5;
+        public static void Method5()
+        {            
+            string v = "MethodV";
+            TestDelegate test = DelegateClass.Method5;
             var mmc = test(v);
+            
+            mmc.ForEach(name => Console.WriteLine(name.GenericProperty));
+            /*
             int i = 0;
             var myEnumerator = mmc.GetEnumerator();
             while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
             {
                 Console.WriteLine("[{0}] {1}", i++, myEnumerator.Current.GenericProperty);
-            }            //mmc.ForEach(name => Console.WriteLine(name));
-            //Console.WriteLine(mmc[1].GenericProperty);
+            }            mmc.ForEach(name => Console.WriteLine(name));
+                         Console.WriteLine(mmc[1].GenericProperty);
+            */
+        }
 
+        //-----------------------------
+        public static void Method7() {
 
-            //-----------------------------
-            object o = "";
+            string inputs = "JBSWY3DPEHPK3PXV";
+            string v = "Method1";
+            string j = "Method1_list";
+            object o = "object, object1";
             List<string> lists = new List<string>
             {
-                v,
-                mess
+                j,
+                inputs
             };
             Operation<string, object, List<string>> operation = DelegateClass.Method1;
             operation += DelegateClass.Method7; // Добавляем в делегат вызов Method7   
             List<string> mm = operation?.Invoke(v, o, lists);
             mm.ForEach(name => Console.WriteLine(name));
-
-            i = 0;
+            /*
+            int i = 0;
             var mEnumerator = mm.GetEnumerator();
             while ((mEnumerator.MoveNext()) && (mEnumerator.Current != null))
             {
-                //Console.WriteLine("[{0}] {1}", i++, mEnumerator.Current);
+                Console.WriteLine("[{0}] {1}", i++, mEnumerator.Current);
             }                   
-
+            */
             //-------------------------------
             Console.Read();
             int k = 6;
             int s = 5;
             int SquareNumber(int n) => n * k;
-            int result2 = Method3(6, s, SquareNumber);
+            int result2 = DelegateClass.Method3(3, s, SquareNumber);
             Console.WriteLine(result2);
 
 
-            Func<int, int> func = Method4;
+            Func<int, int> func = DelegateClass.Method4;
             func?.Invoke(6);
         }
 
@@ -108,25 +116,6 @@ namespace ThreadStartProject
         /// </summary>       
 
 
-        public static int Method3(int n, int s, Func<int, int> operation)
-        {
-            int oper = operation(n * s);
-            return oper;
-        }
-
-        public static int Method4(int s)
-        {
-            int oper = s;
-            return oper;
-        }
-
-        public static List<MyClass> Method5(string s)
-        {
-            List<MyClass> list = new List<MyClass>() { };
-            list.Add(new MyClass() { GenericProperty = "GenericProperty from Method5" });
-            list.Add(new MyClass() { GenericProperty = "GenericProperty from Method6" });
-            //new MyClass { GenericProperty = "GenericProperty from Method5" }
-            return list;
-        }
+        
     }
 }
