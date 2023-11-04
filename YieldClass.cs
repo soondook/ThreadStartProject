@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ThreadStartProject
 {
-    public static class YieldClass
+    public class YieldClass
     {
 
         public static IEnumerable<int> GenerateHugeSequenceLazy()
@@ -52,7 +52,7 @@ namespace ThreadStartProject
     }
 
 
-    public static class YieldClass2
+    public class YieldClass2
     {
 
         public static IEnumerable<int> Eager10()
@@ -107,7 +107,7 @@ namespace ThreadStartProject
 
             foreach (var e in Lazy10())
             {
-                Console.WriteLine($"LazyObtained2: {e}");
+                //Console.WriteLine($"LazyObtained2: {e}");
                 if (e == 1)
                     break;
             }
@@ -116,7 +116,55 @@ namespace ThreadStartProject
 
     }
 
+    public class EagerClass
+    {
 
+        public static IEnumerable<int> CheckEagerlyEnumerateLazily(int value)
+        {
+            if (value == 0)
+                throw new ArgumentException("value cannot be 0");
+            return Impl();
 
+            IEnumerable<int> Impl()
+            {
+                Console.WriteLine("Lazy");
+                int counter = 0;
+                try
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        //Console.WriteLine($"Adding: {i}");
+                        counter++;
+                        yield return value;
+                    }
+                }
+                finally
+                {
+                    Console.WriteLine($"Lazily computed: {counter}");
+                }
+            }
+            //yield return value;
+            }
+        
+
+        public static void Lazy()
+        {
+
+            IEnumerable<int> seqLazy = null;
+            try
+            {
+                seqLazy = CheckEagerlyEnumerateLazily(10);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Exception caught");
+            }
+
+            if (seqLazy != null)
+                foreach (var e in seqLazy.Take(2))
+                    Console.WriteLine(e);
+
+        }
+    }
     
 }

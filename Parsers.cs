@@ -26,7 +26,7 @@ namespace ThreadStartProject
     {
         public string Title;
         public List<string> Body;
-        //Body.("BEGIN PGP PRIVATE KEY BLOCK");
+        // --https://social.msdn.microsoft.com/Forums/es-ES/9cba1a5d-ff3c-478d-86ec-9520d9c97b5a/-c?forum=programminglanguageru
 
 
         public static IEnumerable<Blocks> Load(string path)
@@ -38,11 +38,11 @@ namespace ThreadStartProject
                 //Console.WriteLine(line);
                 if (line.Length == 0 && ret != null)
                 {
-                    //Console.WriteLine("Length: "+line.Length + "ret :" +ret.Title);
+                    Console.WriteLine("Length: "+line.Length + "ret :" +ret.Title);
                     //Console.WriteLine(ret.Title);
-                    //yield return ret; //-- если раскоментить, будет ублировать последнюю строку (в блоке) в файле с пустыми разделителями!  
+                    yield return ret; //-- если раскоментить, будет дублировать последнюю строку (в блоке) в файле с пустыми разделителями!  
                     ret = null;
-                    //continue; //--Раскомментировать для скрытия пробелов между блоками в файле с пустыми разделителями!
+                    continue; //--Раскомментировать для скрытия пробелов между блоками в файле с пустыми разделителями!
                 }
 
                 if (line.EndsWith(":"))
@@ -59,8 +59,7 @@ namespace ThreadStartProject
                 }
 
 
-                if (ret != null)
-                    ret.Body.Add(line);
+                ret?.Body.Add(line);
                 yield return ret;
             }
         }

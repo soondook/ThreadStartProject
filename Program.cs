@@ -35,18 +35,17 @@ namespace ThreadStartProject
             }
             //string args1 = "new";
             //Parsers.RunParser(args1);
+            var p = new Product<int>("Apple", 100, 100);
             //CallDelegate.MethodOTP();
-            CallDelegate.Method7();
+            CallDelegate.Method5();
             SplitClass.SSplit(s);
             YieldClass2.ResultElder();
-            /*
-            for (int i = 1; i < 9; i++)
-            {
-                Console.WriteLine("Главный поток: {0}",  i* i);
-                //Console.WriteLine(i * i);
-                Thread.Sleep(300);
-            }
-            */
+            //EagerClass.Lazy();
+            ActionExample.Run();
+            var dt1 = DateTool.Randomdayfunc();
+            var dt2 = DateTool.Randomdayfunc();
+            var dt3 = DateTool.Min(dt1, dt2);
+            Console.WriteLine("MinDate: {0}", dt3);
             Console.ReadLine();
         }
 
