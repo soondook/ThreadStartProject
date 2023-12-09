@@ -33,13 +33,20 @@ namespace ThreadStartProject
                 };
                 //myThread1.Start(counter);
             }
-            //string args1 = "new";
+
+
+            string args1 = "new";
+            //WScriptStdout.RunParsers(args1);
             //Parsers.RunParser(args1);
             var p = new Product<int>("Apple", 100, 100);
+            //Console.WriteLine(p.Energy.ToString());
+            var eating = new Eating<int>();
+            eating.Add1(106, 10);
+            //Console.WriteLine(eating.Energy.ToString());
             //CallDelegate.MethodOTP();
-            CallDelegate.Method5();
+            CallDelegate.Method7();
             SplitClass.SSplit(s);
-            YieldClass2.ResultElder();
+            //YieldClass2.ResultElder();
             //EagerClass.Lazy();
             ActionExample.Run();
             var dt1 = DateTool.Randomdayfunc();
